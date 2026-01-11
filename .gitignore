@@ -15,3 +15,5 @@ create-scaffold/bin/scaffold.exe
 dist/
 *.tar.gz
 *.zip
+
+example_templates_old_formats_not_this_project

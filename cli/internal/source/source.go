@@ -86,10 +86,26 @@ func parseGitSource(uri string) (*Source, error) {
 		uri = uri[:idx]
 	}
 
-	// Extract subdir (after //)
-	if idx := strings.Index(uri, "//"); idx != -1 {
-		s.Subdir = uri[idx+2:]
-		uri = uri[:idx]
+	// Extract subdir (after // but not the :// in https://)
+	// Look for // that comes after the host part
+	searchStart := 0
+	if strings.HasPrefix(uri, "https://") {
+		searchStart = 8 // len("https://")
+	} else if strings.HasPrefix(uri, "http://") {
+		searchStart = 7 // len("http://")
+	} else if strings.HasPrefix(uri, "git@") {
+		// git@github.com:org/repo - find the first /
+		if colonIdx := strings.Index(uri, ":"); colonIdx != -1 {
+			searchStart = colonIdx + 1
+		}
+	}
+
+	if searchStart > 0 {
+		remaining := uri[searchStart:]
+		if idx := strings.Index(remaining, "//"); idx != -1 {
+			s.Subdir = remaining[idx+2:]
+			uri = uri[:searchStart+idx]
+		}
 	}
 
 	s.URL = uri
