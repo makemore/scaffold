@@ -10,6 +10,7 @@ cli/scaffold.exe
 node_modules/
 create-scaffold/bin/scaffold
 create-scaffold/bin/scaffold.exe
+.npmrc
 
 # Build artifacts
 dist/

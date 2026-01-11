@@ -1,5 +1,5 @@
 {
-  "name": "create-scaffold",
+  "name": "@makemore/scaffold",
   "version": "0.1.0",
   "description": "Bootstrap any software stack with sensible defaults",
   "keywords": [
@@ -10,7 +10,7 @@
     "project-generator",
     "boilerplate"
   ],
-  "author": "Christopher Cochran",
+  "author": "MakeMore",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -30,6 +30,9 @@
     "bin",
     "scripts",
     "README.md"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }
 
