@@ -1,0 +1,29 @@
+# Scaffold Template Index
+# This file maps shorthand names to template sources
+# Users can use: scaffold init myapp --base django
+# Instead of: scaffold init myapp --base github:scaffold-dev/scaffold//templates/django-base
+
+version: "1"
+
+# Official templates bundled with Scaffold
+# These are resolved relative to the Scaffold repository
+official:
+  django:
+    source: "github:scaffold-dev/scaffold//templates/django-base"
+    description: "Django REST API with authentication, Cloud Tasks, S3 storage"
+    
+  nextjs:
+    source: "github:scaffold-dev/scaffold//templates/nextjs-base"
+    description: "Next.js 15 with TypeScript, Tailwind CSS, shadcn/ui"
+
+# Featured community templates (curated)
+# Submit a PR to add your template here
+community: {}
+
+# Template aliases for convenience
+aliases:
+  django-api: django
+  django-rest: django
+  next: nextjs
+  react: nextjs
+

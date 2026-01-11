@@ -1,0 +1,67 @@
+name: Test Templates
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'templates/**'
+      - 'tests/templates/**'
+      - '.github/workflows/test-templates.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'templates/**'
+      - 'tests/templates/**'
+      - '.github/workflows/test-templates.yml'
+  workflow_dispatch:
+
+jobs:
+  test-django:
+    name: Test Django Template
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      
+      - name: Run Django template tests
+        run: |
+          chmod +x tests/templates/*.sh
+          ./tests/templates/test_django.sh --no-docker
+
+  test-nextjs:
+    name: Test Next.js Template
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      
+      - name: Run Next.js template tests
+        run: |
+          chmod +x tests/templates/*.sh
+          ./tests/templates/test_nextjs.sh --no-docker
+
+  test-docker:
+    name: Test Templates in Docker
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Run all template tests in Docker
+        run: |
+          chmod +x tests/templates/*.sh
+          ./tests/templates/run_all.sh
+

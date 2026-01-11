@@ -1,0 +1,34 @@
+# Scaffold Template Configuration
+# Next.js Base Template
+
+name: nextjs-base
+description: Production-ready Next.js starter with Tailwind CSS v4 and shadcn/ui
+version: "1.0.0"
+
+# Template variables that users will be prompted for
+variables:
+  - name: project_name
+    description: Human-readable project name
+    default: My Next.js App
+    
+  - name: project_slug
+    description: URL-safe project identifier (lowercase, hyphens)
+    default: my-nextjs-app
+    
+  - name: description
+    description: Short project description
+    default: A modern Next.js application
+
+# Files/directories to exclude from the generated project
+exclude:
+  - scaffold.yaml
+  - node_modules/
+  - .next/
+  - "*.log"
+
+# Post-generation hooks
+hooks:
+  post_generate:
+    - command: npm install
+      description: Installing dependencies
+

@@ -1,0 +1,22 @@
+# Development Template Index
+# Use with: SCAFFOLD_INDEX=templates-dev.yaml scaffold init ...
+
+version: "1"
+
+official:
+  django:
+    source: "file:~/Projects/barney/templates/django-base"
+    description: "Django REST API with authentication, Cloud Tasks, S3 storage"
+
+  nextjs:
+    source: "file:~/Projects/barney/templates/nextjs-base"
+    description: "Next.js 15 with TypeScript, Tailwind CSS, shadcn/ui"
+
+community: {}
+
+aliases:
+  django-api: django
+  django-rest: django
+  next: nextjs
+  react: nextjs
+

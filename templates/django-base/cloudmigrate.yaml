@@ -1,0 +1,65 @@
+# Cloud Build configuration for running Django migrations
+#
+# Usage:
+#   gcloud builds submit --config cloudmigrate.yaml --project=PROJECT_ID
+#
+# Or use the fabfile:
+#   fab migrate
+
+substitutions:
+  _DJANGO_SETTINGS_MODULE: django_starter.settings.cloud_production
+  _SERVICE_NAME: django_starter
+  _CLOUD_SQL_INSTANCE: crimson-305210:europe-west2:kryten
+
+steps:
+  # Build the container image (or use existing)
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/${_SERVICE_NAME}'
+      - '--cache-from'
+      - 'gcr.io/$PROJECT_ID/${_SERVICE_NAME}'
+      - '.'
+
+  # Push the image so exec-wrapper can pull it
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'gcr.io/$PROJECT_ID/${_SERVICE_NAME}'
+
+  # Run migrations with Cloud SQL proxy
+  - name: 'gcr.io/google-appengine/exec-wrapper'
+    args:
+      - '-i'
+      - 'gcr.io/$PROJECT_ID/${_SERVICE_NAME}'
+      - '-s'
+      - '${_CLOUD_SQL_INSTANCE}'
+      - '-e'
+      - 'DJANGO_SETTINGS_MODULE=${_DJANGO_SETTINGS_MODULE}'
+      - '-e'
+      - 'GCP_PROJECT_ID=$PROJECT_ID'
+      - '--'
+      - 'python'
+      - 'manage.py'
+      - 'migrate'
+      - '--noinput'
+
+  # Collect static files with Cloud SQL proxy
+  - name: 'gcr.io/google-appengine/exec-wrapper'
+    args:
+      - '-i'
+      - 'gcr.io/$PROJECT_ID/${_SERVICE_NAME}'
+      - '-s'
+      - '${_CLOUD_SQL_INSTANCE}'
+      - '-e'
+      - 'DJANGO_SETTINGS_MODULE=${_DJANGO_SETTINGS_MODULE}'
+      - '-e'
+      - 'GCP_PROJECT_ID=$PROJECT_ID'
+      - '--'
+      - 'python'
+      - 'manage.py'
+      - 'collectstatic'
+      - '--noinput'
+
+timeout: '1800s'

@@ -1,0 +1,117 @@
+name: django-base
+description: Production-ready Django starter with GCP Cloud Run deployment
+type: base
+version: "1.0.0"
+
+variables:
+  - name: project_name
+    description: Human-readable project name
+    type: string
+    default: "My Django Project"
+    required: true
+
+  - name: project_slug
+    description: Python package name (lowercase, underscores)
+    type: string
+    default: "my_project"
+    required: true
+    pattern: "^[a-z][a-z0-9_]*$"
+
+  - name: description
+    description: Short project description
+    type: string
+    default: "A Django project"
+
+  - name: author_name
+    description: Author name
+    type: string
+    default: "Your Name"
+
+  - name: author_email
+    description: Author email
+    type: string
+    default: "you@example.com"
+
+  - name: python_version
+    description: Python version
+    type: choice
+    choices: ["3.11", "3.12", "3.13"]
+    default: "3.12"
+
+  - name: database
+    description: Database backend
+    type: choice
+    choices: ["postgres", "sqlite"]
+    default: "postgres"
+
+  - name: use_allauth
+    description: Include django-allauth for authentication
+    type: bool
+    default: true
+
+  - name: use_rest_framework
+    description: Include Django REST Framework
+    type: bool
+    default: true
+
+  - name: gcp_project
+    description: GCP project ID (for Cloud Run deployment)
+    type: string
+    default: ""
+
+  - name: gcp_region
+    description: GCP region for deployment
+    type: choice
+    choices: ["europe-west1", "europe-west2", "us-central1", "us-east1", "asia-east1"]
+    default: "europe-west2"
+
+files:
+  exclude:
+    - "**/__pycache__/**"
+    - "*.pyc"
+    - "*.pyo"
+    - "db.sqlite3"
+    - ".env"
+    - "*.egg-info/**"
+
+  rename:
+    "__project_slug__": "{{ project_slug }}"
+
+actions:
+  - name: create_virtualenv
+    description: Create Python virtual environment
+    type: command
+    command: python{{ python_version }}
+    args: ["-m", "venv", ".venv"]
+    optional: true
+
+  - name: install_dependencies
+    description: Install Python dependencies
+    type: command
+    command: .venv/bin/pip
+    args: ["install", "-r", "requirements.txt"]
+    optional: true
+
+  - name: run_migrations
+    description: Run database migrations
+    type: command
+    command: .venv/bin/python
+    args: ["manage.py", "migrate"]
+    optional: true
+
+  - name: next_steps
+    description: Display next steps
+    type: message
+    message: |
+      ✅ Project '{{ project_name }}' created successfully!
+
+      Next steps:
+        1. cd {{ project_slug }}
+        2. source .venv/bin/activate
+        3. cp .env.example .env
+        4. python manage.py runserver
+
+      For GCP deployment:
+        1. ./devops/gcp/setup-project.sh {{ project_slug }}
+        2. fab deploy
+

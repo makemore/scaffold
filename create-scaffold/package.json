@@ -1,0 +1,35 @@
+{
+  "name": "create-scaffold",
+  "version": "0.1.0",
+  "description": "Bootstrap any software stack with sensible defaults",
+  "keywords": [
+    "scaffold",
+    "template",
+    "generator",
+    "cli",
+    "project-generator",
+    "boilerplate"
+  ],
+  "author": "Christopher Cochran",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/christophercochran/scaffold"
+  },
+  "bin": {
+    "create-scaffold": "./bin/create-scaffold.js",
+    "scaffold": "./bin/scaffold.js"
+  },
+  "scripts": {
+    "postinstall": "node scripts/install.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "bin",
+    "scripts",
+    "README.md"
+  ]
+}
+
