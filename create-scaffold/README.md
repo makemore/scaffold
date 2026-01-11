@@ -63,7 +63,7 @@ npx create-scaffold myapp --base file:~/templates/my-template
 
 ## Documentation
 
-For full documentation, visit: https://github.com/christophercochran/scaffold
+For full documentation, visit: https://github.com/makemore/scaffold
 
 ## License
 

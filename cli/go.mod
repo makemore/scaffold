@@ -1,4 +1,4 @@
-module github.com/christophercochran/scaffold
+module github.com/makemore/scaffold
 
 go 1.25.4
 

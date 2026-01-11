@@ -9,7 +9,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/christophercochran/scaffold/internal/config"
+	"github.com/makemore/scaffold/internal/config"
 )
 
 // Processor handles template processing

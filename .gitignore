@@ -1,2 +1,17 @@
 .idea
 .DS_Store
+
+# Go binaries
+cli/scaffold
+cli/scaffold.exe
+*.exe
+
+# Node
+node_modules/
+create-scaffold/bin/scaffold
+create-scaffold/bin/scaffold.exe
+
+# Build artifacts
+dist/
+*.tar.gz
+*.zip

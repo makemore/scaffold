@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/christophercochran/scaffold/internal/registry"
+	"github.com/makemore/scaffold/internal/registry"
 	"github.com/spf13/cobra"
 )
 

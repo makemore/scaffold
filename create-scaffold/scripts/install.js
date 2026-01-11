@@ -7,7 +7,7 @@ const { execSync } = require("child_process");
 
 const VERSION = "0.1.0";
 const BINARY_NAME = "scaffold";
-const GITHUB_REPO = "christophercochran/scaffold";
+const GITHUB_REPO = "makemore/scaffold";
 
 // Map Node.js platform/arch to Go platform/arch
 const PLATFORM_MAP = {

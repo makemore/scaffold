@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/christophercochran/scaffold/cmd"
+	"github.com/makemore/scaffold/cmd"
 )
 
 func main() {

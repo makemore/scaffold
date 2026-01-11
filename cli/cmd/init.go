@@ -7,10 +7,10 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/christophercochran/scaffold/internal/config"
-	"github.com/christophercochran/scaffold/internal/registry"
-	"github.com/christophercochran/scaffold/internal/source"
-	"github.com/christophercochran/scaffold/internal/template"
+	"github.com/makemore/scaffold/internal/config"
+	"github.com/makemore/scaffold/internal/registry"
+	"github.com/makemore/scaffold/internal/source"
+	"github.com/makemore/scaffold/internal/template"
 	"github.com/spf13/cobra"
 )
 
